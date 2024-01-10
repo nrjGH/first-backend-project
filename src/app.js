@@ -11,4 +11,9 @@ app.use(express.json({limit:"16kb"}))                       //to ensure json pac
 app.use(express.urlencoded({extended:true, limit:"16kb"}))  //to ensure URL be accepted in various forms
 app.use(express.static("public"))                           //to store static data
 app.use(cookieParser())                                     //cookieparser helps execute crud operations on cookies in user's browser 
+
+
+//routes
+import userRouter from "./routes/user.route.js"
+app.use("/api/v1/users",userRouter)
 export {app}

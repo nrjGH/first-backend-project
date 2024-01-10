@@ -1,5 +1,7 @@
+//writing a high order function: a function that takes function as input and returns a function as an output.
+// we experienced an error here, without the return, the function would give errors further when creating routes, which was solved 
 const asyncHandler = (requestHandler) => {
-    (req, res, next) => {
+    return (req, res, next) => {
         Promise.resolve(requestHandler(req,res,next)).catch((err)=>next(err))
     }
 }
