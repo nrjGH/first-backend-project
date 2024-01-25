@@ -6,3 +6,5 @@ class ApiResponse{
         this.success=statusCode < 400       // statuscodes are generally given by the company in form of "specsheet", in startup they are made by us. (<400) for responses and (>400) for errors
     }
 }
+
+export {ApiResponse}

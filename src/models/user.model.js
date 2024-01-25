@@ -41,23 +41,23 @@ const userSchema = Schema({
     },
     refreshToken:{
         type:String
-    },s
+    },
     
 
 },{timestamps:true})
 
 userSchema.pre("save",async function (next){            // pre hooks are used to run any code executions just before saving
     if(! this.isModified("password")) return next();    // only if "passsword" field is modified, we want the pre hook to work, else we can straight away call the next()
-    this.password=bcrypt.hash(this.password,10)
+    this.password = await bcrypt.hash(this.password,10)
     next()
 })
 
 userSchema.methods.isPasswordCorrect = async function (passsword){
-    return await bcrypt.compare(passsword,this.passsword)
+    return await bcrypt.compare(passsword,this.password)
 }
 
-userSchema.methods.generateAccesToken = function(){
-    jwt.sign(
+userSchema.methods.generateAccessToken = function(){
+    return jwt.sign(
         {
             _id:this._id,
             email:this.email,
@@ -70,8 +70,8 @@ userSchema.methods.generateAccesToken = function(){
         }
     )
 }
-userSchema.methods.generateRefreshToken = function(){
-    jwt.sign(
+userSchema.methods.generateRefreshToken = function(){                           // if you dont return no access and refresh token they wont be generated duh
+    return jwt.sign(
         {
             _id:this._id,
         },
