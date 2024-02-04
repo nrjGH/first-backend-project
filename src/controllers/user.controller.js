@@ -109,9 +109,6 @@ const loginUser = asyncHandler( async (req, res) => {
         throw new ApiError(401,"invalid credentials")
     }
 
-    console.log(user._id); // useless console in case i forget abt it 
-
-
     const {accessToken,refreshToken} = await generateAccessAndRefreshTokens(user._id)
 
     const loggedInUser = await User.findById(user._id).select("-password -refreshToken")
@@ -120,7 +117,7 @@ const loginUser = asyncHandler( async (req, res) => {
         httpOnly : true,                                            // cookies be available only through http
         secure : true                                               // cookies be shared only via https    
     }
-    console.log(accessToken);
+
     return res
     .status(200).
     cookie("accessToken", accessToken, options)
