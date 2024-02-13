@@ -29,7 +29,6 @@ const registerUser = asyncHandler( async (req, res) => {
     // })
 
     const {username, email, fullName, password} = req.body
-    // console.log(email)
 
     //validation part 
     if(
@@ -90,7 +89,6 @@ const registerUser = asyncHandler( async (req, res) => {
 const loginUser = asyncHandler( async (req, res) => {
 
     const {email, username, password} = req.body
-
     if(!(username || email)){
         throw new ApiError(400, "username or email is required for login")
     }
@@ -134,6 +132,7 @@ const loginUser = asyncHandler( async (req, res) => {
 })
 
 const logoutUser = asyncHandler(async(req, res) => {
+    
     await User.findByIdAndUpdate(
         req.user._id,
         {

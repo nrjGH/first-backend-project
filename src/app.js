@@ -19,4 +19,10 @@ app.use("/api/v1/users",userRouter)
 
 import router from "./routes/video.route.js"
 app.use("/api/v1/videos", router)
+
+import playlistRouter from "./routes/playlist.route.js"
+app.use("/api/v1/playlists", playlistRouter)
+
 export {app}
+
+

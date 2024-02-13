@@ -109,7 +109,7 @@ const deleteVideo = asyncHandler(async (req, res) => {                          
     const { videoId } = req.params
     
     const result = await Video.deleteOne({_id:videoId})
-    console.log(result)
+    
     if(result.deletedCount === 1){
         return res
         .status(200)
